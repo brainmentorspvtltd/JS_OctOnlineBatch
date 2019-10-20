@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Change Event</h1>
+
+    <input type="text" placeholder="Enter name" onchange="validate(this)">
+    <span id="result"></span>
+
+    <script>
+        function validate(obj) {
+            // alert("Blur Called...");
+            var username = obj.value;
+            var span = document.getElementById("result");
+            // if (username == "") {
+            //     span.innerHTML = "Please fill this field";
+            //     obj.style.border = "1px solid red";
+            // } else {
+            //     span.innerHTML = "";
+            // }
+
+            // Truthy and Falsy
+            if (!username) {
+                span.innerHTML = "Please fill this field";
+                obj.style.border = "1px solid red";
+            } else {
+                span.innerHTML = "";
+                obj.style.border = "1px solid green";
+            }
+        }
+    </script>
+</body>
+
+</html>
