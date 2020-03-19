@@ -1,0 +1,39 @@
+{
+    "brand1" :  {
+        "brand" : "one\\plus",
+        "models" : [
+            "6T",
+            "7",
+            "7T"
+        ],
+        "6T" : {
+            "dual sim" : true,
+            "dual front cam" : false,
+            "otherSpecs" : null
+        }
+    },
+    "brand2" : {
+        "brand" : "red\"mi\"æ",
+        "models" : [
+            "A2",
+            "A3",
+            "Poco F1"
+        ],
+        "poco f1" : {
+            "dual sim" : true,
+            "dual front cam" : [24,12],
+            "otherSpecs" : {
+                "memory" : "6gb",
+                "storage" : "128gb"
+            }
+        }
+    },
+    "brands" : [
+        "Samsung",
+        "Apple",
+        "Vivo",
+        "Oppo",
+        "Redmi",
+        "OnePlus"
+    ]
+}

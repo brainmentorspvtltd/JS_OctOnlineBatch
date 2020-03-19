@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <style>
+        input.ng-invalid{
+            background-color: purple;
+            color: white;
+        }
+        input.ng-valid{
+            background-color: lawngreen;
+            color: white;
+        }
+        form.ng-pristine{
+            background-color: burlywood;
+        }
+        form.ng-dirty{
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+
+    <div ng-app="myApp" ng-controller="formController">
+        <form novalidate>
+            First Name: <br><input type="text" ng-model="user.firstname">
+            <br><br>
+            Last Name: <br><input type="text" ng-model="user.lastname">
+            <br><br>
+            <button ng-click="resetForm()">Reset</button>
+        </form>
+        <br>
+        Name of defaultUser is {{defaultUser}}
+        <br>
+        Name of user is {{user}}
+        <br><br>
+        <form name="myForm">
+            <!-- <input type="text" ng-model="textBox" name="textBox" required> -->
+            <br>
+            <input type="email" ng-model="myBox" name="myBox" required>
+            <span ng-show="myForm.myBox.$invalid && myForm.myBox.$touched">The email is invalid and it is required</span>
+            <br><br>
+        </form>
+        <!-- <p>Textbox is valid : {{myForm.myBox.$valid}}</p>
+        <p>Textbox is invalid : {{myForm.myBox.$invalid}}</p>
+        <p>Textbox is touched : {{myForm.myBox.$touched}}</p>
+        <p>Textbox is untouched : {{myForm.myBox.$untouched}}</p>
+        <p>Textbox is dirty : {{myForm.myBox.$dirty}}</p>
+        <p>Textbox is pristine : {{myForm.myBox.$pristine}}</p>
+        <br>
+        <p>Form is valid : {{myForm.$valid}}</p>
+        <p>Form is invalid : {{myForm.$invalid}}</p>
+        <p>Form is dirty : {{myForm.$dirty}}</p>
+        <p>Form is pristine : {{myForm.$pristine}}</p>
+        <p>Form is submitted : {{myForm.$submitted}}</p> -->
+    </div>
+
+    <script>
+        var app = angular.module('myApp', [ ]);    
+        app.controller('formController', function($scope){
+            $scope.defaultUser = {
+                firstname : "John",
+                lastname : "Smith"
+            }
+            $scope.resetForm = function(){
+                $scope.user = angular.copy($scope.defaultUser)
+            }
+            $scope.resetForm()
+        })
+        /*
+        ng-touched
+        ng-untouched
+        ng-dirty
+        ng-pristine
+        ng-valid
+        ng-invalid
+        ng-valid-required
+        ng-invalid-required
+
+        ng-pristine
+        ng-dirty
+        ng-valid
+        ng-invalid
+        ng-valid-required
+        ng-invalid required
+        */
+    </script>
+</body>
+</html>

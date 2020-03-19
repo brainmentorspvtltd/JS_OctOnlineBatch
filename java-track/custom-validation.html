@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+    <form name="myForm">
+        <input type="text" name="myBox" ng-model="myBox" my-directive>
+        {{myForm.myBox.$valid}}
+    </form>
+    
+    <script>
+        var app = angular.module('myApp', [ ]);    
+        app.directive('myDirective', function(){
+            return{
+                require: 'ngModel', 
+                link: function(scope, element, attributes, ngModelController){
+                    function doValidation(value){
+                        if(value.indexOf("t") > -1){
+                            ngModelController.$setValidity('charT', true)
+                        }
+                        else{
+                            ngModelController.$setValidity('charT', false)
+                        }
+                        return value
+                    }
+                    ngModelController.$parsers.push(doValidation);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

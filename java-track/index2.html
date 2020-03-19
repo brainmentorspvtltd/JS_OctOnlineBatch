@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title id="demo">Document</title>
+    <style>
+        #container{
+            width:500px;
+            height: 500px;
+            position: relative;
+            background: chartreuse;
+        }
+        #animation-div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background: yellow;
+        }
+        img{
+            width: 500px;
+            height: 250px;
+        }
+        #newDiv{
+            width: 250px;
+            height: 100px;
+            background-color:aqua;
+        }
+        #newPara, #anotherPara{
+            color: navy;
+            background-color: yellow;
+        }
+    </style>
+<!-- <script src="jquery-3.4.1.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  <!-- CDN link (Content Delivery Network) -->
+<script src="script.js"></script>
+<script>
+
+    //      $(selector).action()
+    // $(this).hide()
+
+    // $(function(){
+    //     $("p").hide()
+    // })
+
+    // $(document).ready(function(){
+    //     $("p").click(function(){
+    //         $(this).hide();
+    //     })
+    // })
+
+    // document.getElementsByTagName("p")
+    //     // window.addEventListener("load", () => {
+    //         function startTimer(){
+    //             var timer = setInterval(moveDiv, 10);
+    //             var pos = 0;
+    //             var div = document.getElementById("animation-div")
+    //             function moveDiv(){
+    //                 //test here for some condition to check if the timer should continue or not
+    //                 if(pos == 400){
+    //                     clearInterval(timer)
+    //                 }
+    //                 else{
+    //                     //code to change element's style here
+    //                     pos = pos + 1
+    //                     div.style.top = pos + 'px';
+    //                     div.style.left = pos + 'px'
+    //                 }
+    //             }
+    //         }
+    //     // })
+
+    //     function printOnConsole(e){
+    //         e.preventDefault();
+    //         console.log("Form submitted");
+    //     }
+
+    //     function changeText(element, msg){
+    //         console.log(element)
+    //         element.innerHTML = msg;
+    //     }
+
+    //     function changeText2(){
+    //         document.getElementById("heading").innerHTML = "Register Form";
+    //     }
+
+    //     function showDate(){
+    //         document.getElementById("heading").innerHTML = new Date();
+    //     }
+        
+    //     // window.addEventListener("unload", () => {
+    //     //     alert("You will be redirected to some new page!")
+    //     // })
+
+    //     // window.addEventListener("load", () => {
+    //     //     console.log("Document loaded!")
+    //     // })
+    //     // navigator.cookieEnabled = false;
+    //     function checkCookies(){
+    //         if(navigator.cookieEnabled == true){
+    //             console.log("Cookies are enabled")
+    //         }
+    //         else{
+    //             console.log("Cookies are not enabled")
+    //         }
+    //     }
+
+    //     function doSomeChanges(element){
+    //         element.style.borderColor = 'green';
+    //         element.value = element.value.toUpperCase();
+    //     }
+
+    //     function mouseDown(){
+    //         console.log('You pressed mouse button')
+    //     }
+
+    //     function firstClick(){
+    //         console.log("This is the first event handler")
+    //     }
+
+    //     function secondClick(){
+    //         console.log("This is the second event handler")
+    //         document.getElementById("mouseEventTest").removeEventListener('click', secondClick)
+    //     }
+
+    //     window.addEventListener('load', () => {
+
+    //         //event bubbling -> child first, then parent
+    //         //event capturing -> parent first, then child
+
+    //         document.getElementById("newDiv").addEventListener("click", () => {
+    //             console.log("Div was clicked")
+    //         }, true);  // false -> event bubbling (default), true -> event capturing
+
+    //         document.getElementById("newPara").addEventListener("click", () => {
+    //             console.log("P was clicked")
+    //         }, true)
+
+    //         heading = document.getElementById("heading");
+    //         submitBtn = document.getElementById("submitBtn")
+
+    //         heading.addEventListener("click", function(){
+    //             changeText(heading, "Register Form")
+    //         });
+
+    //         submitBtn.addEventListener("click", function(){
+    //             changeText(submitBtn, "Submitted")
+    //         })
+
+    //         // document.getElementById("showDate").addEventListener('click', showDate)
+
+    //         var dateButton = document.getElementById("showDate");
+    //         if(dateButton.addEventListener){
+    //             dateButton.addEventListener('click', showDate);
+    //         }
+    //         else if(dateButton.attachEvent){
+    //             dateButton.attachEvent('onclick', showDate);
+    //         }
+
+    //         document.getElementById("mouseEventTest").addEventListener('mousedown', mouseDown)
+
+    //         document.getElementById("mouseEventTest").addEventListener('click', function(){
+    //             console.log("This is the first event handler")
+    //         })
+
+    //         document.getElementById("mouseEventTest").addEventListener('click', () => {
+    //             console.log("This is the second event handler")
+    //             document.getElementById("mouseEventTest").removeEventListener('click', secondClick)
+    //         })
+
+    //     })
+
+    //     window.addEventListener("resize", () => {
+    //         console.log("Window resized")
+    //     })
+
+    //     // element.addEventListener( event , function , useCapture - should event capturing be done or not)
+
+    //     //for older browsers
+    //     //addEventListener -> attachEvent(event, function)
+    //     //removeEventListener -> detachEvent(event,function)
+
+    //     // Root element - <html> (parentNode)
+    //     //                                     <head> (firstChild) (previous sibling) (childNode)
+    //     //                                     <body> (lastChild) (next sibling) (childNode)
+    //     // 1. parentNode
+    //     // 2. childNodes -> NodeList
+    //     // 3. firstChild
+    //     // 4. lastChild
+    //     // 5.nextSibling
+    //     // 6. previousSibling
+
+    //     window.addEventListener("load", () => {
+    //         var para = document.createElement("p");
+    //         var text = document.createTextNode("This has been generated by writing some JS");
+    //         para.appendChild(text);
+    //         // document.getElementById("newDiv").appendChild(para)
+    //         var newPara = document.getElementById("newPara");
+    //         var anotherPara = document.getElementById("anotherPara")
+    //         document.getElementById("newDiv").insertBefore(para,anotherPara)
+    //     })
+
+    </script>
+
+</head>
+<body onload="checkCookies()">
+    <button id="hide">Hide P tag</button>
+    <button id="show">Show P tag</button>
+    <button id="toggle">Toggle Button</button>
+    <br><br><br>
+    <table>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>7</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>9</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>10</td>
+            <td>10</td>
+        </tr>
+    </table>
+    <br><br>
+    <h1 class="intro" target="_blank">HTML</h1>
+    <p class="intro">Introduction</p>
+    <ul>
+        <li>Milk</li>
+        <li>Butter</li>
+        <li>Eggs</li>
+    </ul>
+    <ul>
+        <li>Milk</li>
+        <li>Butter</li>
+        <li>Eggs</li>
+    </ul>
+    <a href="index.html" target="_blank">Click on this link to go to next page</a>
+    <a target="abcd">This link hasn't got href attribute</a>
+    <br><br>
+    <div id="newDiv" class="test">
+        <p id="newPara"> This is to test event bubbling and event capturing</p>
+        <p id="anotherPara">This is another paragraph</p>
+    </div>
+    <br>
+    <br>
+    <button id="showDate">Tell me the date</button>
+    <button  id="mouseEventTest" onmouseup="console.log('You released mouse button')">Test mouse events</button>
+    <div id="container">
+        <img onload="startTimer()" src="image1.jpg" alt="Some random image">
+        <img src="image2.jpg" alt="Some random image">
+        <div id=animation-div onmouseover="document.getElementById('animation-div').style.background = 'tomato'" onmouseout="document.getElementById('animation-div').style.background = 'yellow'">
+            <!-- My animation code is going to come here -->
+        </div>
+    </div>
+    
+    <br><br>
+
+    <!-- <h1 onclick="this.innerHTML = 'Register Form'">Login Form</h1> -->
+
+    <!-- <h1 onclick="changeText(this, 'Register Form')" id="heading">Login Form</h1> -->
+    <h1 id="heading">Login Form</h1>
+
+    <form  id="test" onsubmit="printOnConsole(event)">
+        <input type="text" name="fullName" id="fullName" onchange="doSomeChanges(this)" oninput="console.log(document.getElementById('fullName').value)" placeholder="Type your name here" onfocus="this.style.background = 'yellow'" onblur="this.style.background = 'white'">
+
+        <!-- <button type="submit" onclick="changeText(this, 'Submitted')" >Submit</button> -->
+        <button type="submit" id="submitBtn">Submit</button>
+        <input type="button" value="Reset">
+    </form>
+
+</body>
+</html>

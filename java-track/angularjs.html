@@ -1,0 +1,270 @@
+<!-- AngularJS is a JavaScript Framework -->
+<!-- AngularJS 1.x extends HTML with new attributes
+AngularJS is perfect for Single Page Applications (SPA)
+Directives, expressions, filters, modules, controllers
+Events, DOM, Forms, Input, Validation, Http -->
+<!-- AngularJS is perfect for CRUD applications
+Create, Read, Update, Delete -->
+<!-- 2009, Misko Hevery  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <style>
+        /*
+        ng-empty
+        ng-not-empty
+        ng-touched
+        ng-untouched
+        ng-valid
+        ng-invalid
+        ng-dirty
+        ng-pristine
+        */
+        input.ng-invalid{
+            background-color: aqua;
+        }
+        table, th, td{
+            border: 1px solid grey;
+            /* width: 25%; */
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        /* table tr:nth-child(odd){
+            background-color: #f1f1f1;
+        }
+        table tr:nth-child(even){
+            background-color: #c1c1c1;
+        } */
+    </style>
+</head>
+<body>
+    <!-- ng-app directive defines an AngularJS application -->
+    <!-- ng-model directive binds the value of HTML controls (input, select, textarea) to application data -->
+    <!-- ng-model provides validation for data, status for data (invalid, dirty, touched, error), provide css classes, bind HTML elements to HTML forms -->
+    <!-- expression or ng-bind directive binds application data to the HTML view -->
+
+    <div ng-app="myApp" ng-init="myColor='black'; cost=100; quantity=5; human = { firstname : 'Ram', lastname : 'Kumar' }; arr = [10,15,34,23,45]; names = ['Jenny', 'Jaani', 'Bob', 'Tom', 'Jim', 'Joe', 'Ryan', 'Mary', 'Twinkle', 'Jasmine']">
+
+        <p>Color in rootscope is : {{color}}</p>
+
+        <div ng-controller="eventsController">
+            <!-- <h1 ng-click="increment()">Bring mouse over me !</h1> -->
+            <h1 ng-mousemove="myFunction($event)">Bring mouse over me !</h1>
+            <h2>Coordinates : {{x + ',' +y}}</h2>
+            <h2 ng-show="showH2">Count is {{count}}</h2>
+            <br><br><br>
+
+            <form>
+                Pick a topic : 
+                <select ng-model="topicSelectedUsingDropdown">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="js">JS</option>
+                </select>
+            </form>
+
+            <br>
+
+            <div ng-switch="topicSelectedUsingDropdown">
+                <div ng-switch-when="html">
+                    <h1>HTML</h1>
+                    <p>HTML stands for HyperText Markup Language</p>
+                </div>
+                <div ng-switch-when="css">
+                    <h1>CSS</h1>
+                    <p>CSS stands for Cascading Style Sheets</p>
+                </div>
+                <div ng-switch-when="js">
+                    <h1>JS</h1>
+                    <p>JS stands for JavaScript</p>
+                </div>
+            </div>
+
+            <br><br>
+
+            <form>
+                Pick a topic :
+                <input type="radio" ng-model="topicSelected" value="html"> HTML
+                <input type="radio" ng-model="topicSelected" value="css"> CSS
+                <input type="radio" ng-model="topicSelected" value="js"> JavaScript
+            </form>
+            <div ng-switch="topicSelected">
+                <div ng-switch-when="html">
+                    <h1>HTML</h1>
+                    <p>HTML stands for HyperText Markup Language</p>
+                </div>
+                <div ng-switch-when="css">
+                    <h1>CSS</h1>
+                    <p>CSS stands for Cascading Style Sheets</p>
+                </div>
+                <div ng-switch-when="js">
+                    <h1>JS</h1>
+                    <p>JS stands for JavaScript</p>
+                </div>
+            </div>
+            <br><br>
+        </div>
+
+        <div ng-controller="jsonController">
+            <!-- Mobiles : {{mobilesJson}} -->
+            <ul>
+                <li ng-repeat="item in mobilesJson">
+                    {{item.id + ', ' + item.name + ', ' + item.price}}
+                </li>
+            </ul>
+        </div>
+
+        <br><br>
+
+        <div ng-controller="httpController">
+            Response is {{res}}, Status Code is {{statusCode}}, Status Text is {{status_text}}
+            <br>
+            Clock -> {{clock}}
+            <br>
+            Hex representation is {{hex}}
+            <br>
+            Another hex representation is {{ 25500 | representInHex }}
+        </div>
+
+        <div ng-controller="newController">
+            Absolute url of our document is : {{pageUrl}}
+            <br><br>
+            <div>
+                <button ng-disabled="myToggleButton">Click me !!</button>
+            </div>
+            <input type="checkbox" ng-model="myToggleButton">
+            myToggleButton has value - {{myToggleButton}}
+            <br><br>
+            <select ng-model="selectedName" ng-options="name for name in names"></select>
+            <select>
+                <option ng-repeat="name in names">{{name}}</option>
+            </select>
+            <!-- <select ng-model="selectedHuman">
+                <option value="{{human}}" ng-repeat="human in humans">{{human.name}}</option>
+            </select> -->
+            <select ng-model="selectedHuman" ng-options="human.name for human in humans"></select>
+            <h1>Selected human is {{selectedHuman.name}}</h1>
+            <h1>Selected human is from {{selectedHuman.country}}</h1>
+            <select ng-model="selectedPhone" ng-options="phone.model_1 for (key,phone) in smartphones"></select>
+            <h1>Selected phone is {{selectedPhone.model_1}}</h1>
+        </div>
+
+        <div ng-controller="myController">
+            <p>Color in controller's scope is : {{color}}</p>
+            <br><br>
+
+            <table>
+                <tr>
+                    <th>S.No.</th>
+                    <th ng-click="changeTableOrder('name')">Name</th>
+                    <th ng-click="changeTableOrder('country')" >Country</th>
+                </tr>
+                <tr ng-repeat="human in humans | orderBy : orderByColumn"> 
+                    <td ng-if="$odd" style="background-color: #f1f1f1;">{{$index + 1}}</td>
+                    <td ng-if="$odd" style="background-color: #f1f1f1;">{{human.name | alternateCase }}</td>
+                    <td ng-if="$odd" style="background-color: #f1f1f1;">{{human.country | alternateCase }}</td>
+
+                    <td ng-if="$even">{{$index + 1}}</td>
+                    <td ng-if="$even">{{human.name | alternateCase }}</td>
+                    <td ng-if="$even">{{human.country | alternateCase }}</td>
+                </tr>
+            </table>
+
+            <br><br>
+            <p>Name: <input type="text" ng-model="fullName"></p>
+            <h2>Hello {{fullName}}</h2>
+            <p ng-bind="fullName">Hello</p>
+            <p>5 + 5 is {{5+5}}</p>
+            Full Name : {{firstName + " " + lastName}} <br>
+            Full Name using fn: {{ showFullName() }}
+            Full Name : <span ng-bind="firstName + ' ' + lastName"></span>
+            <br><br>
+            <input type="text" style="background-color: {{myColor}}; color: white" ng-model="myColor">
+            <br><br>
+
+            <form name="myForm">
+                Email: <input type="email" name="emailAddress" ng-model="emailBox">
+                <span ng-show="myForm.emailAddress.$error.email">Invalid email address</span>
+                <br>
+                Valid -> {{myForm.emailAddress.$valid}}
+                <br>
+                Dirty -> {{myForm.emailAddress.$dirty}}
+                <br>
+                Touched -> {{myForm.emailAddress.$touched}}
+            </form>
+
+            <p>Total cost is {{ cost * quantity }}</p>
+            <p>Total cost is <span ng-bind = "cost * quantity"></span></p>
+            <p>Name of human is {{human.firstname + " " + human.lastname}}</p>
+            <p>Name of human is <span ng-bind="human.firstname + ' ' + human.lastname"></span></p>
+            <p>Second value in array is {{arr[1]}}</p>
+            <p>Last value in array is <span ng-bind="arr[4]"></span></p> 
+            <br><br>
+            Quantity : <input type="number" ng-model="quantity">
+            Cost : <input type="number" ng-model="cost">
+            <p>Total cost is {{ cost * quantity | currency }}</p>
+            <br><br>
+            <input type="text" ng-model="filterKey">
+            <ul>
+                <li ng-repeat="name in names | filter : filterKey">
+                    {{ name  | lowercase  }}
+                </li>
+            </ul>
+            <br>
+            <ul>
+                <li ng-repeat = "human in humans | orderBy : 'country' ">
+                    {{ human.name + " lives in " + human.country}}
+                </li>
+            </ul>
+            <br>
+            <!-- attribute -->
+            <p my-custom-directive></p> 
+            <!-- element name -->
+            <my-custom-directive></my-custom-directive>
+            <!-- class -->
+            <p class="my-custom-directive"></p>
+            <!-- comment -->
+            <!-- directive: my-custom-directive -->
+        </div>
+
+        <p>Color in rootscope is : {{color}}</p>
+
+    </div>
+
+    <script src="myApp.js"></script>
+    <script src="myController.js"></script>
+    <script src="myDirective.js"></script>
+    <script src="myService.js"></script>
+    <script src="myFilter.js"></script>
+
+</body>
+</html>
+
+<!-- modules define AngularJS Applications -> ng-app
+controllers control AngularJS Applications -> ng-controller -->
+<!--
+Events:
+ng-blur
+ng-change
+ng-click - III
+ng-copy
+ng-cut
+ng-dblclick
+ng-focus
+ng-keydown
+ng-keypress
+ng-keyup
+ng-mousedown - I
+ng-mouseenter - 2
+ng-mouseleave - 4
+ng-mousemove - 3
+ng-mouseover - 1
+ng-mouseup - II
+ng-paste
+-->
